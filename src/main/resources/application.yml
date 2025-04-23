@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: development
+  application:
+    name: springboot-clean-arch-boilterplate
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+    show-sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: true
+      minimum-idle: 5
+      maximum-pool-size: 20
+      transaction-isolation: transaction_read_committed
+      connection-timeout: 30000
+  jmx:
+    enabled: false
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari: debug
+    sun:
+      rmi:
+        transport:
+          tcp: info
+    javax:
+      management:
+        remote:
+          rmi: info

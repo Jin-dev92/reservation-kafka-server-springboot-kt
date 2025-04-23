@@ -1,0 +1,9 @@
+# Spring Boot application configuration for production environment
+spring:
+  datasource:
+    url: ENC(amRiYzpwb3N0Z3Jlc3FsOi8vbG9jYWxob3N0OjU0MzIvcG9zdGdyZXM=)
+    username: ENC(cHJvZF91c2Vy)
+    password: ENC(cHJvZF9wYXNzd29yZA==)
+logging:
+  level:
+    root: error
