@@ -1,11 +1,9 @@
 spring:
-  profiles:
-    active: development
+  #  profiles:
+  #    active: development
   application:
     name: springboot-clean-arch-boilterplate
   jpa:
-    hibernate:
-      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -13,10 +11,6 @@ spring:
 
     show-sql: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
     hikari:
       auto-commit: true
       minimum-idle: 5
@@ -39,7 +33,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-#        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate.model
+        #        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate.model
         spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate
     consumer:
       group-id: ticket-reservation-group
@@ -47,7 +41,7 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-#        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate.model
+        #        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate.model
         spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate
 
     # 토픽 설정
