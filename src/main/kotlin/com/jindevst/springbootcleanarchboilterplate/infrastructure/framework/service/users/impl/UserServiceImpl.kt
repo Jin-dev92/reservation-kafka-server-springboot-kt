@@ -3,29 +3,43 @@ package com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.se
 import com.jindevst.springbootcleanarchboilterplate.domain.users.Users
 import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.data.dto.request.users.CreateUserDto
 import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.data.dto.request.users.UpdateUserDto
+import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.repository.UserRepository
 import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.service.users.UserService
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
-class UserServiceImpl : UserService {
-    override fun getUserExecutes(id: Long): Users? {
+class UserServiceImpl(
+    private val userRepository: UserRepository
+) : UserService {
+
+    @Transactional(readOnly = true)
+    override fun getUserExecutes(id: UUID): Users? {
         // usecase 를 통한 구현
-        TODO("Not yet implemented")
+        return this.userRepository.findById(id).orElse(null)
     }
 
-    override fun getUsersExecutes(id: Long): List<Users> {
-        TODO("Not yet implemented")
+    @Transactional(readOnly = true)
+    override fun getUsersExecutes(): List<Users> {
+        return this.userRepository.findAll()
     }
 
+    @Transactional
     override fun createUserExecutes(body: CreateUserDto): Users {
         TODO("Not yet implemented")
     }
 
-    override fun updateUserExecutes(id: Long, body: UpdateUserDto): Users {
+    @Transactional
+    override fun updateUserExecutes(
+        id: UUID,
+        body: UpdateUserDto
+    ): Users {
         TODO("Not yet implemented")
     }
 
-    override fun deleteUserExecutes(id: Long) {
+    @Transactional
+    override fun deleteUserExecutes(id: UUID) {
         TODO("Not yet implemented")
     }
 }

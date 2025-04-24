@@ -1,4 +1,10 @@
 package com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.data.dto.request.users
 
-class UpdateUserDto : BaseUserDto() {
-}
+import com.jindevst.springbootcleanarchboilterplate.domain.users.UserRole
+
+data class UpdateUserDto(
+    var name: String,
+    var email: String,
+    var password: String,
+    var role: UserRole = UserRole.USER
+)
