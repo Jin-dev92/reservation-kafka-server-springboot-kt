@@ -5,15 +5,18 @@ spring:
     name: springboot-clean-arch-boilterplate
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
 
     show-sql: true
   datasource:
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
     hikari:
       auto-commit: true
       minimum-idle: 5
@@ -22,16 +25,58 @@ spring:
       connection-timeout: 30000
   jmx:
     enabled: false
+  # H2 콘솔 설정
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+
+  # 카프카 설정
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+#        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate.model
+        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate
+    consumer:
+      group-id: ticket-reservation-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+#        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate.model
+        spring.json.trusted.packages: com.jindevst.springbootcleanarchboilterplate
+
+    # 토픽 설정
+    topics:
+      reservation-request: reservation-requests
+      reservation-confirmed: reservation-confirmed
+      payment-request: payment-requests
+      payment-confirmed: payment-confirmed
+      notification: notifications
+
+# 서버 포트 설정
+server:
+  port: 8080
+
+# 로깅 설정
 logging:
   level:
-    com:
-      zaxxer:
-        hikari: debug
-    sun:
-      rmi:
-        transport:
-          tcp: info
-    javax:
-      management:
-        remote:
-          rmi: info
+    root: INFO
+    com.jindevst.springbootcleanarchboilterplate: DEBUG
+    org.springframework.kafka: INFO
+
+# 회복성 설정 (Circuit Breaker)
+resilience4j:
+  circuitbreaker:
+    instances:
+      reservationService:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50

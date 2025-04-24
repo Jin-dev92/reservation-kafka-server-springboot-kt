@@ -9,12 +9,12 @@ enum class UserRole {
 }
 
 @Entity
-@Table(name = "users")
+@Table
 data class Users(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, updatable = false)
-    val id: UUID? = null,
+    val id: UUID,
 
     @Column(nullable = false, length = 50)
     var name: String,
