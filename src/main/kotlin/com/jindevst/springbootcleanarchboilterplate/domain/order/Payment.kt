@@ -16,5 +16,5 @@ data class Payment(
     var paymentNumber: String,
 
     @OneToOne(mappedBy = "payment")
-    var order: Order,
+    var orders: Orders,
 ) : BaseEntity()

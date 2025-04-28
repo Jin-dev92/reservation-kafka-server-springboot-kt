@@ -6,7 +6,7 @@ import java.util.*
 
 @Table
 @Entity
-data class Order(
+data class Orders(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, updatable = false)
@@ -15,6 +15,6 @@ data class Order(
     @Column(nullable = false, updatable = false, unique = true)
     var orderNumber: String,
 
-    @OneToOne(mappedBy = "payment")
+    @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true)
     var payment: Payment,
 ) : BaseEntity()
