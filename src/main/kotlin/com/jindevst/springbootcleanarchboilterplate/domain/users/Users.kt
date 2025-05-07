@@ -14,7 +14,7 @@ data class Users(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, updatable = false)
-    val id: UUID,
+    val id: UUID? = null,
 
     @Column(nullable = false, length = 50)
     var name: String,

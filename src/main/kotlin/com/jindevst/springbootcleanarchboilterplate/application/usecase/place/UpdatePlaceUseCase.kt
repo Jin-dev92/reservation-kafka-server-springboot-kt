@@ -4,5 +4,5 @@ import com.jindevst.springbootcleanarchboilterplate.application.command.place.Up
 import java.util.*
 
 interface UpdatePlaceUseCase {
-    fun updateExecutes(command: UpdatePlaceCommand): UUID
+    fun updateExecutes(command: UpdatePlaceCommand): UUID?
 }

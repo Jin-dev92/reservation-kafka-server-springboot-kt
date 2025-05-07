@@ -5,13 +5,13 @@ import com.jindevst.springbootcleanarchboilterplate.domain.reservation.Reservati
 import jakarta.persistence.*
 import java.util.*
 
-@Table
+@Table(uniqueConstraints = [UniqueConstraint(name= "uk_seat_number_place",columnNames = ["seatNumber", "place"])])
 @Entity
 data class Seat(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, updatable = false)
-    val id: UUID,
+    val id: UUID? = null,
 
     @Column(nullable = false)
     val seatNumber: Short,
@@ -28,7 +28,7 @@ data class Seat(
     var place: Place,
 
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true)
-    var reservation: Reservation,
+    var reservation: Reservation? = null,
 ) : BaseEntity()
 
 
@@ -37,7 +37,8 @@ enum class SeatType {
     임산부_우대,
     노약자
 }
-enum class SeatStatus{
+
+enum class SeatStatus {
     예매_가능,
     예매_불가,
     예약_대기
