@@ -1,0 +1,8 @@
+package com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.service.place
+
+import com.jindevst.springbootcleanarchboilterplate.application.usecase.place.CreatePlaceUseCase
+import com.jindevst.springbootcleanarchboilterplate.application.usecase.place.DeletePlaceUseCase
+import com.jindevst.springbootcleanarchboilterplate.application.usecase.place.GetPlaceUseCase
+import com.jindevst.springbootcleanarchboilterplate.application.usecase.place.UpdatePlaceUseCase
+
+interface PlaceService: CreatePlaceUseCase, UpdatePlaceUseCase, GetPlaceUseCase, DeletePlaceUseCase

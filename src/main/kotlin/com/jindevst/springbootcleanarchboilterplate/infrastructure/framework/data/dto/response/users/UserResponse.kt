@@ -4,4 +4,4 @@ import com.jindevst.springbootcleanarchboilterplate.domain.users.Users  // Users
 
 import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.data.dto.response.BaseResponseDto
 
-class UsersResponseDto : BaseResponseDto<List<Users>>() {}
+class UserResponse : BaseResponseDto<Users>() {}

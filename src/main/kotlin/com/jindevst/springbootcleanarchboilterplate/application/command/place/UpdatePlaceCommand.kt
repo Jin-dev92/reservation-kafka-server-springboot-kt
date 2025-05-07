@@ -1,8 +1,8 @@
 package com.jindevst.springbootcleanarchboilterplate.application.command.place
 
-import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.data.dto.request.place.CreatePlaceDto
+import com.jindevst.springbootcleanarchboilterplate.infrastructure.framework.data.dto.request.place.UpdatePlaceDto
 
-data class UpdatePlaceCommand(val dto: CreatePlaceDto) {
+data class UpdatePlaceCommand(val dto: UpdatePlaceDto) {
     init {
         require(dto.name.isNotBlank()) { "name is blank" }
         require(dto.address.isNotBlank()) { "address is blank" }
